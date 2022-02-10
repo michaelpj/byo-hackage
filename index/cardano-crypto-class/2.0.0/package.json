@@ -1,1 +1,1 @@
-{"signatures":[],"signed":{"_type":"Targets","expires":null,"targets":{"<repo>/package/cardano-crypto-class-2.0.0.tar.gz":{"hashes":{"sha256":"1ecacdca1d2d79e781b6e5569844b34582cf8ebb2661ec5554c30f41255eb9b9"},"length":40809}},"version":1}}
+{"signatures":[],"signed":{"_type":"Targets","expires":null,"targets":{"<repo>/package/cardano-crypto-class-2.0.0.tar.gz":{"hashes":{"sha256":"473b8eac93982036e300ecb9bb6d2aa5abfc150be2ab48a3a7ec32e8417bda1b"},"length":40845}},"version":1}}
