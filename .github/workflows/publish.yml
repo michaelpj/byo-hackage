@@ -1,0 +1,28 @@
+name: Publish Hackage repository
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/cache@v2
+        with:
+          path: ./repo
+          key: ${{ runner.os }}-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-${{ github.sha }}
+            ${{ runner.os }}-
+      - name: Build
+        run: ./build.sh
+        env:
+          KEYS: ${{ secrets.KEYS }}
+      - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@v4.2.2
+        with:
+          branch: gh-pages
+          folder: ./repo

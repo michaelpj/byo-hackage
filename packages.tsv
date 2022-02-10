@@ -1,0 +1,5 @@
+https://github.com/Quid2/flat                      ee59880f47ab835dbd73bea0847dab7869fc20d8
+https://github.com/input-output-hk/cardano-crypto  07397f0e50da97eaa0575d93bee7ac4b2b2576ec
+https://github.com/input-output-hk/cardano-base    0b1b5b37e305c4bb10791f843bc8c81686a0cba4 base-deriving-via binary binary/test cardano-crypto-class cardano-crypto-praos cardano-crypto-tests measures orphans-deriving-via slotting strict-containers
+https://github.com/input-output-hk/cardano-prelude fd773f7a58412131512b9f694ab95653ac430852 cardano-prelude cardano-prelude-test
+https://github.com/input-output-hk/Win32-network   3825d3abf75f83f406c1f7161883c438dac7277d
