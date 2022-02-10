@@ -10,17 +10,37 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/cache@v2
+
+      - uses: haskell/actions/setup@v1
+
+      - name: Setup cache for cabal store
+        uses: actions/cache@v2
+        with:
+          path: ${{ steps.setup-haskell.outputs.cabal-store }}
+          key: cabal-store-${{ github.sha }}
+          restore-keys: |
+            cabal-store-${{ github.sha }}
+            cabal-store-
+
+      - name: Install hackage-repo-tool
+        run: |
+          cabal install hackage-repo-tool
+          echo "$HOME/.cabal/bin" >> $GITHUB_PATH
+
+      - name: Setup cache for the repository
+        uses: actions/cache@v2
         with:
           path: ./repo
-          key: ${{ runner.os }}-${{ github.sha }}
+          key: hackage-repo-${{ github.sha }}
           restore-keys: |
-            ${{ runner.os }}-${{ github.sha }}
-            ${{ runner.os }}-
+            hackage-repo-${{ github.sha }}
+            hackage-repo-
+
       - name: Build
         run: ./build.sh
         env:
           KEYS: ${{ secrets.KEYS }}
+
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4.2.2
         with:
