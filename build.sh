@@ -33,6 +33,9 @@ cat packages.tsv | while read repo hash subdirs; do
 
   echo "Running cabal sdist"
   cd $tmpdir
+
+  echo "Remove cabal.project*"
+  rm -v cabal.project*
   cabal sdist --ignore-project $subdirs
 
   echo "Moving sdist inside repository"
