@@ -3,7 +3,7 @@ name: Publish Hackage repository
 on:
   push:
     branches:
-      - master
+      - main
 
 jobs:
   publish:
