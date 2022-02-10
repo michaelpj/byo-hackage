@@ -40,6 +40,11 @@ jobs:
         env:
           KEYS: ${{ secrets.KEYS }}
 
+      - name: Copy static web assets
+        run: |
+          cp static/index.html ./repo
+          cp README.md ./repo
+
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4.2.2
         with:
