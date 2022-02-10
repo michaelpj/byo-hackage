@@ -1,6 +1,9 @@
 name: Publish Hackage repository
 
 on:
+  pull_request:
+    branches:
+      - main
   push:
     branches:
       - main
@@ -45,7 +48,8 @@ jobs:
           cp static/index.html ./repo
           cp README.md ./repo
 
-      - name: Deploy 🚀
+      - if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+        name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4.2.2
         with:
           branch: gh-pages
