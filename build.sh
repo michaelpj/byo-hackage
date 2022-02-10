@@ -28,17 +28,14 @@ cat packages.tsv | while read repo hash subdirs; do
   name=$(basename $repo)
   tmpdir=$(mktemp -d -p $PWD $name.XXXXXXXXXX)
 
-  echo "Fetching $repo/tarball/$hash into $tmpdir"
+  echo "Fetching $repo/tree/$hash into $tmpdir"
   curl -L $repo/tarball/$hash | tar xz --strip-components=1 -C $tmpdir
 
-  echo "Running cabal sdist"
   cd $tmpdir
+  echo "Running cabal sdist $subdirs"
+  cabal sdist $subdirs
 
-  echo "Remove cabal.project*"
-  rm -vf cabal.project*
-  cabal sdist --ignore-project $subdirs
-
-  echo "Moving sdist inside repository"
+  echo "Moving sdists inside repository"
   mv -v dist-newstyle/sdist/*.tar.gz $repodir/package/
   cd ..
 
