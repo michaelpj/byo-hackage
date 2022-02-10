@@ -21,9 +21,7 @@ jobs:
         with:
           path: ${{ steps.setup-haskell.outputs.cabal-store }}
           key: cabal-store-${{ github.sha }}
-          restore-keys: |
-            cabal-store-${{ github.sha }}
-            cabal-store-
+          restore-keys: cabal-store-
 
       - name: Install hackage-repo-tool
         run: |
@@ -35,9 +33,7 @@ jobs:
         with:
           path: ./repo
           key: hackage-repo-${{ github.sha }}
-          restore-keys: |
-            hackage-repo-${{ github.sha }}
-            hackage-repo-
+          restore-keys: hackage-repo-
 
       - name: Build
         run: ./build.sh

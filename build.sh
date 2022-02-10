@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -e
+
 # Initialisation
 
 repodir=${repodir:-$PWD/repo}
@@ -16,7 +18,7 @@ else
   fi
 fi
 
-# Downloading packages
+# Download packages
 
 mkdir -p $repodir/package
 
@@ -35,7 +37,7 @@ cat packages.tsv | while read repo hash subdirs; do
   rm -rf $tmpdir
 done
 
-# Bootstrap or update
+# Bootstrap or update repository
 
 if [ ! -f $repodir/root.json ]; then
   echo "Bootstapping hackage repository"
