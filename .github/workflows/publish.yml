@@ -31,13 +31,6 @@ jobs:
           cabal install hackage-repo-tool
           echo "$HOME/.cabal/bin" >> $GITHUB_PATH
 
-      - name: Setup cache for the repository
-        uses: actions/cache@v2
-        with:
-          path: ./repo
-          key: hackage-repo-${{ github.sha }}
-          restore-keys: hackage-repo-
-
       - name: Build
         run: ./build.sh
         env:

@@ -46,15 +46,10 @@ cat packages.tsv | while read repo hash subdirs; do
   rm -rf $tmpdir
 done
 
-# Bootstrap or update repository
+# Create package repository
 
-if [ ! -f $repodir/root.json ]; then
-  echo "Bootstapping hackage repository"
-  hackage-repo-tool bootstrap --keys ./keys --repo $repodir
-else
-  echo "Updating hackage repository"
-  hackage-repo-tool update --keys ./keys --repo $repodir
-fi
+echo "Bootstapping hackage repository"
+hackage-repo-tool bootstrap --keys ./keys --repo $repodir
 
 echo "Hackage repository built in $repodir"
 
