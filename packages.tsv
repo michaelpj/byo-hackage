@@ -13,3 +13,4 @@ https://github.com/input-output-hk/cardano-crypto            f73079303f663e02828
 https://github.com/input-output-hk/cardano-addresses         71006f9eb956b0004022e80aadd4ad50d837b621 command-line core
 https://github.com/input-output-hk/goblins                   cde90a2b27f79187ca8310b6549331e59595e7ba
 https://github.com/input-output-hk/Win32-network             3825d3abf75f83f406c1f7161883c438dac7277d
+https://github.com/input-output-hk/plutus-apps               dc04b5491ce6e3f830fc26d74191d3583e7816ec doc freer-extras playground-common plutus-chain-index plutus-chain-index-core plutus-contract plutus-ledger plutus-ledger-constraints plutus-pab plutus-pab-executables plutus-playground-server plutus-use-cases quickcheck-dynamic web-ghc
