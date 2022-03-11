@@ -16,19 +16,23 @@ repository andreabedini-byo-hackage
 
 # What packages are available?
 
-[These ones](https://github.com/andreabedini/byo-hackage/blob/main/packages.tsv). It's a simple list of GitHub repositories, hashes and subdirectories.
+The ones listed in [`config.toml`](https://github.com/andreabedini/byo-hackage/blob/main/config.toml).
+It's a simple list of tarballs and subdirectories. GitHub provides a
+tarball for every commit hash so that's convenient!
 
-At each push event, a [script](https://github.com/andreabedini/byo-hackage/blob/main/build.sh) downloads those repositories, runs `cabal sdist` on each of them, and updates the package repository using the [`hackage-repo-tool`](https://hackage.haskell.org/package/hackage-repo-tool).
+At each push event, a GitHub Actions workflow uses the
+[foliage](https://github.com/andreabedini/foliage) to build a repository
+out of the packages listed in `config.toml`.
 
 # How do I publish a package to this repo?
 
 You could make a pull request, but I am using this repository only for personal testing, so I won't accept it.
 
-Better idea would be making your own repository, just [click here](https://github.com/andreabedini/byo-hackage/generate).
+Better idea would be making your own repository [using this as a template](https://github.com/andreabedini/byo-hackage/generate).
 
 # This is all wrong, you have no idea what you are doing
 
-Yes, that is correct, I have no idea what I am doing. I am playing with things.
+Yes, that is correct, I have no idea what I am doing. I like playing with things.
 
 # Author
 
