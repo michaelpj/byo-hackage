@@ -1,9 +1,6 @@
-name: Publish Hackage repository
+name: Publish repository
 
 on:
-  pull_request:
-    branches:
-      - main
   push:
     branches:
       - main
@@ -11,39 +8,24 @@ on:
 jobs:
   publish:
     runs-on: ubuntu-latest
+
     steps:
+
       - uses: actions/checkout@v2
 
-      - id: setup-haskell
-        uses: haskell/actions/setup@v1
-        with:
-          ghc-version: '8.10.7'
-
-      - name: Setup cache for cabal store
-        uses: actions/cache@v2
-        with:
-          path: ${{ steps.setup-haskell.outputs.cabal-store }}
-          key: cabal-store-${{ github.sha }}
-          restore-keys: cabal-store-
-
-      - name: Install hackage-repo-tool
-        run: |
-          cabal install hackage-repo-tool
-          echo "$HOME/.cabal/bin" >> $GITHUB_PATH
-
-      - name: Build
-        run: ./build.sh
+      - name: Build repository
+        id: build-repository
+        uses: andreabedini/foliage@main
         env:
           KEYS: ${{ secrets.KEYS }}
 
       - name: Copy static web assets
         run: |
-          cp static/index.html ./repo
-          cp README.md ./repo
+          cp static/index.html ${{ steps.build-repository.outputs.repository-path }}
+          cp README.md ${{ steps.build-repository.outputs.repository-path }}
 
-      - if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
-        name: Deploy 🚀
+      - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4.2.2
         with:
           branch: gh-pages
-          folder: ./repo
+          folder: ${{ steps.build-repository.outputs.repository-path }}
