@@ -13,19 +13,25 @@ jobs:
 
       - uses: actions/checkout@v2
 
+      - name: Setup foliage
+        run: |
+          mkdir $HOME/bin
+          curl -L -o $HOME/bin/foliage https://github.com/andreabedini/foliage/releases/latest/download/foliage-Linux
+          chmod a+x $HOME/bin/foliage
+          echo $HOME/bin >> $GITHUB_PATH
+
       - name: Build repository
-        id: build-repository
-        uses: andreabedini/foliage@main
         env:
           KEYS: ${{ secrets.KEYS }}
+        run: foliage
 
       - name: Copy static web assets
         run: |
-          cp static/index.html ${{ steps.build-repository.outputs.repository-path }}
-          cp README.md ${{ steps.build-repository.outputs.repository-path }}
+          cp static/index.html _repo
+          cp README.md _repo
 
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4.2.2
         with:
           branch: gh-pages
-          folder: ${{ steps.build-repository.outputs.repository-path }}
+          folder: _repo
