@@ -95,7 +95,7 @@ subdirs = [
   "typed-protocols-examples"
 ]
 
-[[source]]
+[[sources]]
 url = "https://github.com/input-output-hk/cardano-base/tarball/41545ba3ac6b3095966316a99883d678b5ab8da8"
 subdirs = [
   "base-deriving-via",
@@ -109,30 +109,30 @@ subdirs = [
   "strict-containers"
 ]
 
-[[source]]
+[[sources]]
 url = "https://github.com/input-output-hk/cardano-prelude/tarball/bb4ed71ba8e587f672d06edf9d2e376f4b055555"
 subdirs = [
   "cardano-prelude",
   "cardano-prelude-test"
 ]
 
-[[source]]
+[[sources]]
 url = "https://github.com/input-output-hk/cardano-crypto/tarball/f73079303f663e028288f9f4a9e08bcca39a923e"
 
-[[source]]
+[[sources]]
 url = "https://github.com/input-output-hk/cardano-addresses/tarball/71006f9eb956b0004022e80aadd4ad50d837b621"
 subdirs = [
   "command-line",
   "core"
 ]
 
-[[source]]
+[[sources]]
 url = "https://github.com/input-output-hk/goblins/tarball/cde90a2b27f79187ca8310b6549331e59595e7ba"
 
-[[source]]
+[[sources]]
 url = "https://github.com/input-output-hk/Win32-network/tarball/3825d3abf75f83f406c1f7161883c438dac7277d"
 
-[[source]]
+[[sources]]
 url = "https://github.com/input-output-hk/plutus-apps/tarball/dc04b5491ce6e3f830fc26d74191d3583e7816ec"
 subdirs = [
   "doc",
