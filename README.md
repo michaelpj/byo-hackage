@@ -20,7 +20,7 @@ The ones listed in [`config.toml`](https://github.com/andreabedini/byo-hackage/b
 It's a simple list of tarballs and subdirectories. GitHub provides a
 tarball for every commit hash so that's convenient!
 
-At each push event, a GitHub Actions workflow uses the
+At each push event, a GitHub Actions workflow uses
 [foliage](https://github.com/andreabedini/foliage) to build a repository
 out of the packages listed in `config.toml`.
 
