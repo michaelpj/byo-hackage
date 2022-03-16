@@ -23,7 +23,9 @@ jobs:
       - name: Build repository
         env:
           KEYS: ${{ secrets.KEYS }}
-        run: foliage
+        run: |
+          echo "$KEYS" | base64 -d | tar xvz -C _keys
+          foliage
 
       - name: Copy static web assets
         run: |
