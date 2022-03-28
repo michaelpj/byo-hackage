@@ -20,12 +20,15 @@ jobs:
           chmod a+x $HOME/bin/foliage
           echo $HOME/bin >> $GITHUB_PATH
 
-      - name: Build repository
+      - name: Unpack keys
         env:
           KEYS: ${{ secrets.KEYS }}
         run: |
+          mkdir _keys
           echo "$KEYS" | base64 -d | tar xvz -C _keys
-          foliage
+
+      - name: Build repository
+        run: foliage build
 
       - name: Copy static web assets
         run: |
