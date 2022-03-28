@@ -14,15 +14,14 @@ repository andreabedini-byo-hackage
   secure: True
 ```
 
-# What packages are available?
+# How is this made?
 
-The ones listed in [`config.toml`](https://github.com/andreabedini/byo-hackage/blob/main/config.toml).
-It's a simple list of tarballs and subdirectories. GitHub provides a
-tarball for every commit hash so that's convenient!
+This is made using [foliage](https://github.com/andreabedini/foliage).
 
-At each push event, a GitHub Actions workflow uses
-[foliage](https://github.com/andreabedini/foliage) to build a repository
-out of the packages listed in `config.toml`.
+At each push event, a GitHub Actions workflow builds a repository
+out of the packages listed in `_sources`.
+
+The format of the input files is explained [here](https://github.com/andreabedini/foliage/blob/main/README.md#example).
 
 # How do I publish a package to this repo?
 
