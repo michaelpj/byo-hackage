@@ -34,6 +34,7 @@ jobs:
         run: |
           cp static/index.html _repo
           cp README.md _repo
+          touch _repo/.nojekyll
 
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4.2.2
