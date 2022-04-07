@@ -21,17 +21,6 @@ jobs:
             substituters        = https://hydra.iohk.io https://iohk.cachix.org https://cache.nixos.org/
             trusted-public-keys = hydra.iohk.io:f/Ea+s+dFdN+3Y/G+FDgSq+a5NEWhJGzdjvKNGv0/EQ= iohk.cachix.org-1:DpRUyj7h7V830dp/i6Nti+NEO2/nhblbov/8MW7Rqoo= cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY=
 
-      - name: Setup foliage
-        run: |
-          mkdir $HOME/bin
-          curl -L -o $HOME/bin/foliage https://github.com/andreabedini/foliage/releases/latest/download/foliage-Linux
-          chmod a+x $HOME/bin/foliage
-          echo $HOME/bin >> $GITHUB_PATH
-
-      - name: Setup nix-tools
-        run: |
-          nix build --impure --expr '(let nt = import (builtins.fetchTarball "https://github.com/input-output-hk/nix-tools/archive/master.tar.gz") {}; in nt.nix-tools.components.exes.hackage-to-nix)' -o nt
-
       - name: Unpack keys
         env:
           KEYS: ${{ secrets.KEYS }}
@@ -40,13 +29,13 @@ jobs:
           echo "$KEYS" | base64 -d | tar xvz -C _keys
 
       - name: Build repository
-        run: foliage build --input-directory . --output-directory _repo --keys _keys
-
-      - name: Generate hackage.nix files
+        env:
+          INPUT: .
+          OUTPUT: _repo
+          KEYS: _keys
+          REPOSITORY_URL: https://$${ github.event.repository.owner.name }}.github.io/$${ github.event.repository.name }
         run: |
-          PAGES_URL=https://$${ github.event.repository.owner.name }}.github.io/$${ github.event.repository.name } 
-          echo "Guessed Github Pages URL to be $PAGES_URL"
-          ./nt/bin/hackage-to-nix _repo _repo/01-index.tar PAGES_URL
+          nix run ".#buildRepository"
 
       - name: Copy static web assets
         run: |

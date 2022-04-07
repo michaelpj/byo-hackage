@@ -2,30 +2,31 @@
   description = "byo-hackage";
 
   inputs = {
-		nixpkgs.follows = "haskellNix/nixpkgs-unstable";
-    hackageNix = {
+		nixpkgs.follows = "haskell-nix/nixpkgs-unstable";
+    hackage-nix = {
       url = "github:input-output-hk/hackage.nix";
       flake = false;
     };
-    nixTools = {
+    nix-tools = {
       url = "github:input-output-hk/nix-tools";
       flake = false;
     };
-    haskellNix = {
-      url = "github:input-output-hk/haskell.nix";
+    haskell-nix = {
+      url = "github:input-output-hk/haskell.nix?rev=9987a666f2fba42c330cb6ad35d7deb102264d9a";
       inputs.nixpkgs.follows = "nixpkgs";
-      #inputs.hackage.follows = "hackageNix";
-      inputs.hackage.follows = "nixTools";
+      inputs.hackage.follows = "hackage-nix";
+      inputs.nix-tools.follows = "nix-tools";
     };
-    inputs.flake-utils.url = "github:numtide/flake-utils"; 
     foliage = {
       url = "github:andreabedini/foliage";
       flake = false;
     };
+    flake-utils.url = "github:numtide/flake-utils"; 
   };
 
-  outputs = { self , nixpkgs , haskellNix , flake-utils, foliage }: 
-    flake-utils.lib.eachSystem [ "x86_64-linux" "x86_64-darwin" ] (system: 
-       import ./default.nix { inherit system nixpkgs haskellNix foliage; }
-    )
+  outputs = { self , nixpkgs , haskell-nix , nix-tools, flake-utils, foliage, ... }: 
+    let 
+     system = "x86_64-linux";
+     outs = import ./default.nix { inherit system nixpkgs haskell-nix nix-tools foliage; };
+    in { packages.${system} = outs; };
 }
