@@ -36,12 +36,12 @@ jobs:
           echo "$KEYS" | base64 -d | tar xvz -C _keys
 
       - name: Build repository
-        run: foliage build --input-directory . --output-directory _repo
+        run: foliage build --input-directory . --output-directory _repo --keys _keys
 
       - name: Generate hackage.nix files
         run: |
-          nix build --impure --expr '(let haskellNix = import (builtins.fetchTarball "https://github.com/input-output-hk/haskell.nix/archive/master.tar.gz") {}; in (import haskellNix.sources.nixpkgs haskellNix.nixpkgsArgs).haskell-nix.nix-tools.ghc8107)' -o nt
-          ./nt/bin/hackage-to-nix _repo _repo https://$${ github.event.repository.owner.name }}.github.io/$${ github.event.repository.name } 
+          nix build --impure --expr '(let nt = import (builtins.fetchTarball "https://github.com/input-output-hk/nix-tools/archive/master.tar.gz") {}; in nt.nix-tools.components.exes.hackage-to-nix' -o hn
+          ./hn/bin/hackage-to-nix _repo _repo https://$${ github.event.repository.owner.name }}.github.io/$${ github.event.repository.name } 
 
       - name: Copy static web assets
         run: |
