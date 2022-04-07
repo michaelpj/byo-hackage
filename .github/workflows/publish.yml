@@ -33,7 +33,7 @@ jobs:
           INPUT: .
           OUTPUT: _repo
           KEYS: _keys
-          REPOSITORY_URL: https://$${ github.event.repository.owner.name }}.github.io/$${ github.event.repository.name }
+          REPOSITORY_URL: https://${{ github.event.repository.owner.name }}.github.io/${{ github.event.repository.name }}
         run: |
           nix run ".#buildRepository"
 
