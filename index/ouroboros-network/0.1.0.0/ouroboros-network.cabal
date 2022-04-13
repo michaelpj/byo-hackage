@@ -106,6 +106,9 @@ library
                        Ouroboros.Network.Protocol.LocalStateQuery.Server
                        Ouroboros.Network.Protocol.LocalStateQuery.Type
                        Ouroboros.Network.Protocol.LocalTxMonitor.Type
+                       Ouroboros.Network.Protocol.LocalTxMonitor.Client
+                       Ouroboros.Network.Protocol.LocalTxMonitor.Server
+                       Ouroboros.Network.Protocol.LocalTxMonitor.Codec
                        Ouroboros.Network.Protocol.TipSample.Type
                        Ouroboros.Network.Protocol.TipSample.Client
                        Ouroboros.Network.Protocol.TipSample.Server
@@ -175,6 +178,7 @@ library
                        iproute,
                        nothunks,
                        network           >=3.1.2 && <3.2,
+                       pretty-simple,
                        psqueues          >=0.2.3 && <0.3,
                        serialise         >=0.2   && <0.3,
                        random,
@@ -208,6 +212,7 @@ library
   if flag(asserts)
     ghc-options:       -fno-ignore-asserts
 
+
   -- Still in the lib for now as they're used in ouroboros-consensus.
   -- They should be moved to the separate test lib if they're still needed.
   exposed-modules:     Ouroboros.Network.MockChain.Chain
@@ -234,6 +239,9 @@ library ouroboros-protocol-tests
                        Ouroboros.Network.Protocol.LocalTxSubmission.Direct
                        Ouroboros.Network.Protocol.LocalTxSubmission.Examples
                        Ouroboros.Network.Protocol.LocalTxSubmission.Test
+                       Ouroboros.Network.Protocol.LocalTxMonitor.Direct
+                       Ouroboros.Network.Protocol.LocalTxMonitor.Examples
+                       Ouroboros.Network.Protocol.LocalTxMonitor.Test
                        Ouroboros.Network.Protocol.TipSample.Direct
                        Ouroboros.Network.Protocol.TipSample.Examples
                        Ouroboros.Network.Protocol.TipSample.Test
@@ -304,6 +312,9 @@ test-suite test
                        Test.Ouroboros.Network.PeerSelection.PeerGraph
                        Test.Ouroboros.Network.NodeToNode.Version
                        Test.Ouroboros.Network.NodeToClient.Version
+                       Test.Ouroboros.Network.ShrinkCarefully
+                       Test.Ouroboros.Network.Testnet
+                       Test.Ouroboros.Network.Testnet.Simulation.Node
                        Test.Mux
                        Test.Pipe
                        Test.Socket
@@ -324,6 +335,8 @@ test-suite test
                        iproute,
                        mtl,
                        network,
+                       pipes,
+                       pretty-simple,
                        process,
                        psqueues,
                        random,
@@ -359,8 +372,11 @@ test-suite test
                        -Wno-unticked-promoted-constructors
                        -fno-ignore-asserts
                        -threaded
+                       -rtsopts
+                       +RTS -T -RTS
   if flag(ipv6)
     cpp-options:       -DOUROBOROS_NETWORK_IPV6
+
 
 test-suite cddl
   type:                exitcode-stdio-1.0
