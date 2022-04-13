@@ -37,25 +37,27 @@ library
     Cardano.Ledger.Pretty
     Cardano.Ledger.Pretty.Alonzo
     Cardano.Ledger.Pretty.Mary
+    Cardano.Ledger.Pretty.Babbage
   build-depends:
     bech32,
     bytestring,
+    cardano-crypto-class,
     cardano-data,
     cardano-ledger-alonzo,
+    cardano-ledger-babbage,
+    cardano-ledger-byron,
+    cardano-ledger-core,
     cardano-ledger-shelley,
     cardano-ledger-shelley-ma,
-    cardano-crypto-class,
-    cardano-ledger-byron,
     cardano-protocol-tpraos,
     cardano-slotting,
-    containers,
     compact-map,
+    containers,
+    hashable,
     iproute,
     mtl,
     plutus-ledger-api,
     prettyprinter,
-    set-algebra,
     small-steps,
-    cardano-ledger-core,
     strict-containers,
     text,

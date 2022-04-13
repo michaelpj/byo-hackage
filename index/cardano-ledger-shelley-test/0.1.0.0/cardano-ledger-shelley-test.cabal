@@ -86,6 +86,7 @@ library
     cardano-crypto-test,
     cardano-crypto-wrapper,
     cardano-crypto,
+    cardano-data,
     cardano-ledger-byron,
     cardano-ledger-byron-test,
     cardano-ledger-core,
@@ -99,7 +100,6 @@ library
     compact-map,
     data-default-class,
     deepseq,
-    directory,
     generic-random,
     hashable,
     hedgehog-quickcheck,
@@ -123,6 +123,7 @@ library
     time,
     transformers,
     tree-diff,
+    unliftio,
     vector,
 
 test-suite cardano-ledger-shelley-test
@@ -131,8 +132,6 @@ test-suite cardano-ledger-shelley-test
   type:                exitcode-stdio-1.0
   main-is:             Tests.hs
   other-modules:
-      Test.Control.Iterate.SetAlgebra
-      Test.Control.Iterate.SplitMapRules
       Test.Cardano.Ledger.Shelley.Examples
       Test.Cardano.Ledger.Shelley.Examples.Combinators
       Test.Cardano.Ledger.Shelley.Examples.EmptyBlock
@@ -168,7 +167,7 @@ test-suite cardano-ledger-shelley-test
       -- We set a bound here so that we're alerted of potential space
       -- leaks in our generators (or test) code.
       --
-      -- The 4 megabytes stack bound and 200 megabytes heap bound were
+      -- The 4 megabytes stack bound and 250 megabytes heap bound were
       -- determined ad-hoc.
       "-with-rtsopts=-K4m -M250m"
   build-depends:
@@ -179,12 +178,10 @@ test-suite cardano-ledger-shelley-test
       cardano-binary,
       cardano-data,
       cardano-crypto-class,
-      cardano-crypto-praos,
       cardano-ledger-byron,
       cardano-ledger-core,
       cardano-ledger-pretty,
       cardano-prelude,
-      cardano-prelude-test,
       cardano-protocol-tpraos,
       cardano-slotting,
       cborg,
@@ -233,6 +230,7 @@ benchmark mainbench
     cardano-prelude,
     cardano-protocol-tpraos,
     cardano-slotting,
+    compact-map,
     containers,
     criterion,
     data-default-class,
@@ -249,5 +247,4 @@ benchmark mainbench
   ghc-options:
       -threaded
       -rtsopts
-      -with-rtsopts=-N
-      -O
+      -O2
